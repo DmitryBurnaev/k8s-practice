@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-service-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-service
+  template:
+    metadata:
+      labels:
+        app: hello-service
+    spec:
+      containers:
+      - image: thomaspoignant/hello-world-rest-json
+        name: hello-service
+        ports:
+        - containerPort: 80
+...
