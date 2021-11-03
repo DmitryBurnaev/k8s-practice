@@ -24,6 +24,7 @@ class ExchangeInfoProvider:
             'access_key': self.source_api_key,
         })
         try:
+            logger.info("Accessing to external provider for currency exchange: %s", self.source_url)
             with urlopen(f'{self.source_url}?{query_string}') as resp:
                 response_text = resp.read().decode()
                 response_data = json.loads(response_text)
