@@ -5,7 +5,7 @@ import argparse
 import logging.config
 from http.server import ThreadingHTTPServer
 
-from src.handlers import CurrencyExchangeHTTPHandler
+from handlers import CurrencyExchangeHTTPHandler
 
 LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
 logging.config.dictConfig({
@@ -19,8 +19,8 @@ logging.config.dictConfig({
     },
     "handlers": {"console": {"class": "logging.StreamHandler", "formatter": "standard"}},
     "loggers": {
-        "src.app": {"handlers": ["console"], "level": LOG_LEVEL, "propagate": True},
-        "src.handlers": {"handlers": ["console"], "level": LOG_LEVEL, "propagate": False},
+        "app": {"handlers": ["console"], "level": LOG_LEVEL, "propagate": True},
+        "handlers": {"handlers": ["console"], "level": LOG_LEVEL, "propagate": False},
     },
 })
 logger = logging.getLogger(__name__)
@@ -61,5 +61,5 @@ if __name__ == "__main__":
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:
-            print("\nKeyboard interrupt received, exiting.")
+            logger.warning("\nKeyboard interrupt received, exiting.")
             sys.exit(0)
